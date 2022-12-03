@@ -15,6 +15,36 @@ if __name__ == \"__main__\":
 """
 
 
+TEST_TEMPLATE = """
+from unittest.mock import patch, mock_open
+
+from .main_part_1 import main as main_1
+from .main_part_2 import main as main_2
+
+TEST_INPUT = \"\"\"
+\"\"\".strip()
+
+ANSWER_PART_1 = ...
+ANSWER_PART_2 = ...
+
+
+@patch("builtins.open", new_callable=mock_open, read_data=TEST_INPUT)
+def test_part_1(mock_file):
+    result = main_1()
+
+    mock_file.assert_called_with("input.txt", "r")
+    assert result == ANSWER_PART_1
+
+
+@patch("builtins.open", new_callable=mock_open, read_data=TEST_INPUT)
+def test_part_2(mock_file):
+    result = main_2()
+
+    mock_file.assert_called_with("input.txt", "r")
+    assert result == ANSWER_PART_2
+"""
+
+
 def get_dir(day_num, copy_num=0):
     dir_name = f"./day{day_num}({copy_num})" if copy_num else f"./day{day_num}"
     day_dir = Path(dir_name)
@@ -35,15 +65,20 @@ def main():
 
     # make input.txt
     (day_dir / "input.txt").touch()
+    (day_dir / "__init__.py").touch()
 
     # make python files
-    main_part_1 = day_dir / "main-part-1.py"
-    main_part_2 = day_dir / "main-part-2.py"
+    main_part_1 = day_dir / "main_part_1.py"
+    main_part_2 = day_dir / "main_part_2.py"
+    tests = day_dir / "tests.py"
     with open(main_part_1, "w") as f:
         f.write(SCRIPT)
 
     with open(main_part_2, "w") as f:
         f.write(SCRIPT)
+
+    with open(tests, "w") as f:
+        f.write(TEST_TEMPLATE)
 
 
 if __name__ == "__main__":
