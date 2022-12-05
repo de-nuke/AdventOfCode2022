@@ -53,9 +53,9 @@ reconsideration. In this example, there are 2 such pairs.
 
 In how many assignment pairs does one range fully contain the other?
 
-https://adventofcode.com/2022/day/4#part2
+https://adventofcode.com/2022/day/4
 """
-from typing import Tuple, List
+from typing import List, Tuple
 
 
 def parse_ranges(line: str) -> Tuple[List[int], List[int]]:
