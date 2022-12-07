@@ -6,8 +6,12 @@ from pathlib import Path
 
 
 SCRIPT = """def main():
+    result = ...
     with open("input.txt", "r") as f:
         pass
+
+    print(f\"Result: {result}\")
+    return result
 
 
 if __name__ == \"__main__\":
