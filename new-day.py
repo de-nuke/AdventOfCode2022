@@ -20,7 +20,7 @@ if __name__ == \"__main__\":
 
 
 TEST_TEMPLATE = """
-from unittest.mock import patch, mock_open
+from unittest.mock import mock_open, patch
 
 from .main_part_1 import main as main_1
 from .main_part_2 import main as main_2
